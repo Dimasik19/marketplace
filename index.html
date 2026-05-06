@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FruitPuree Trade | B2B Marketplace</title>
+    <meta
+      name="description"
+      content="Поставка и закупка концентрированного фруктового пюре: манго, абрикос, банан, апельсин."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">FP</div>
+          <div>
+            <h1>FruitPuree Trade</h1>
+            <p>B2B поставки без посредников</p>
+          </div>
+        </div>
+        <div class="contacts">+7 (000) 000-00-00 | sales@fruitpuree.trade</div>
+      </header>
+
+      <nav class="tabs" aria-label="Разделы">
+        <button class="tab active" data-tab="buyers">Покупателям / Buyers</button>
+        <button class="tab" data-tab="suppliers">Поставщикам / Suppliers</button>
+        <div id="langSwitch" class="lang-switch hidden" aria-label="Выбор языка"></div>
+      </nav>
+
+      <main>
+        <section id="buyers" class="panel active"></section>
+        <section id="suppliers" class="panel"></section>
+      </main>
+    </div>
+
+    <div id="offerModal" class="modal hidden" role="dialog" aria-modal="true"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
