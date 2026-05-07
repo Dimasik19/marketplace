@@ -1,8 +1,8 @@
 const products = [
-  { key: "mango", icon: "🥭", ru: "Манго", brix: "28-30%", acid: "0.5-1.0%", origin: "Индия", sort: "Alphonso / Totapuri", image: "./assets/Mango.png", tone: "#f59f1b", accent: "#2f855a" },
-  { key: "apricot", icon: "🍑", ru: "Абрикос", brix: "28-30%", acid: "0.8-1.4%", origin: "Турция / Армения", sort: "Shalakh", image: "./assets/Abricot.png", tone: "#f47c45", accent: "#b45309" },
-  { key: "banana", icon: "🍌", ru: "Банан", brix: "22-24%", acid: "0.3-0.8%", origin: "Эквадор", sort: "Cavendish", image: "./assets/Banana.png", tone: "#f8d24a", accent: "#3f7d3b" },
-  { key: "orange", icon: "🍊", ru: "Апельсин", brix: "35-40%", acid: "1.8-3.0%", origin: "Египет / Бразилия", sort: "Valencia", image: "./assets/Orange.png", tone: "#f97316", accent: "#7c2d12" }
+  { key: "mango", icon: "🥭", ru: "Манго", brix: "28-30%", acid: "0.5-1.0%", origin: "Индия", sort: "Alphonso / Totapuri", image: "./assets/cards/Mango.jpg", heroImage: "./assets/hero/Mango.jpg", tone: "#f59f1b", accent: "#2f855a" },
+  { key: "apricot", icon: "🍑", ru: "Абрикос", brix: "28-30%", acid: "0.8-1.4%", origin: "Турция / Армения", sort: "Shalakh", image: "./assets/cards/Abricot.jpg", heroImage: "./assets/hero/Abricot.jpg", tone: "#f47c45", accent: "#b45309" },
+  { key: "banana", icon: "🍌", ru: "Банан", brix: "22-24%", acid: "0.3-0.8%", origin: "Эквадор", sort: "Cavendish", image: "./assets/cards/Banana.jpg", heroImage: "./assets/hero/Banana.jpg", tone: "#f8d24a", accent: "#3f7d3b" },
+  { key: "orange", icon: "🍊", ru: "Апельсин", brix: "35-40%", acid: "1.8-3.0%", origin: "Египет / Бразилия", sort: "Valencia", image: "./assets/cards/Orange.jpg", heroImage: "./assets/hero/Orange.jpg", tone: "#f97316", accent: "#7c2d12" }
 ];
 
 const supplierI18n = {
@@ -36,7 +36,7 @@ function buyerView() {
         <div class="hero-orbit hero-orbit-one"></div>
         <div class="hero-orbit hero-orbit-two"></div>
         <div class="hero-product-stack">
-          ${products.map((p) => `<img src="${productImage(p)}" alt="" loading="lazy">`).join("")}
+          ${products.map((p) => `<img src="${heroImage(p)}" alt="" loading="lazy">`).join("")}
         </div>
       </div>
     </section>
@@ -99,10 +99,13 @@ function buyerView() {
       </div>
     </section>
     <section class="section process-section">
-      <div class="section-head">
-        <span class="eyebrow">Процесс</span>
-        <h2>Без лишней нагрузки на вашу команду</h2>
-        <p>Берем на себя операционную часть закупки, чтобы производство получило понятные варианты поставки и могло быстрее принять решение.</p>
+      <div class="section-head section-head-action">
+        <div>
+          <span class="eyebrow">Процесс</span>
+          <h2>Без лишней нагрузки на вашу команду</h2>
+          <p>Берем на себя операционную часть закупки, чтобы производство получило понятные варианты поставки и могло быстрее принять решение.</p>
+        </div>
+        <a class="section-action" href="#buyersForm">Оставить заявку</a>
       </div>
       <div class="process-row">
         <article class="process-step">
@@ -230,7 +233,7 @@ function supplierView() {
         <div class="hero-orbit hero-orbit-one"></div>
         <div class="hero-orbit hero-orbit-two"></div>
         <div class="hero-product-stack">
-          ${products.map((p) => `<img src="${productImage(p)}" alt="" loading="lazy">`).join("")}
+          ${products.map((p) => `<img src="${heroImage(p)}" alt="" loading="lazy">`).join("")}
         </div>
       </div>
     </section>
@@ -312,6 +315,10 @@ function productImage(product) {
       </g>
     </svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+function heroImage(product) {
+  return product.heroImage || productImage(product);
 }
 
 function openOfferModal(productKey) {
