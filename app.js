@@ -25,11 +25,11 @@ function buyerView() {
     <section class="hero">
       <div class="hero-copy">
         <span class="eyebrow">B2B marketplace концентратов</span>
-        <h2>Фруктовое пюре для производств, где важны стабильность и вкус.</h2>
-        <p>Подбираем партии под BRIX, кислотность, сорт и логистику. Работаем с прямыми поставками, складским запасом и понятной спецификацией для закупок.</p>
+        <h2>Закроем потребность в фруктовом пюре под ключ.</h2>
+        <p>Найдем производителя под ваш BRIX, сорт, объем, бюджет и сроки, проверим качество, сопроводим контракт, логистику и доставку на склад в России.</p>
         <div class="hero-actions">
           <a class="primary-action" href="#buyersForm">Оставить заявку</a>
-          <span class="hero-note">От 1 бочки до регулярных контрактов</span>
+          <span class="hero-note">Индия, Вьетнам, Египет, Турция и другие рынки</span>
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
@@ -65,7 +65,7 @@ function buyerView() {
           </article>`).join("")}
       </div>
     </section>
-    <section class="section">
+    <section class="section hidden">
       <div class="section-head">
         <span class="eyebrow">Логистика и объёмы</span>
         <h2>Условия работы</h2>
@@ -98,6 +98,89 @@ function buyerView() {
         </div>
       </div>
     </section>
+    <section class="section process-section">
+      <div class="section-head">
+        <span class="eyebrow">Процесс</span>
+        <h2>Без лишней нагрузки на вашу команду</h2>
+        <p>Берем на себя операционную часть закупки, чтобы производство получило понятные варианты поставки и могло быстрее принять решение.</p>
+      </div>
+      <div class="process-row">
+        <article class="process-step">
+          <span>01</span>
+          <strong>Требования</strong>
+          <p>Фиксируем BRIX, кислотность, сорт, страну происхождения, объем и сроки.</p>
+        </article>
+        <article class="process-step">
+          <span>02</span>
+          <strong>Поставщики</strong>
+          <p>Подбираем заводы под задачу, а не только позиции из наличия.</p>
+        </article>
+        <article class="process-step">
+          <span>03</span>
+          <strong>Образцы</strong>
+          <p>Проверяем производителя, документы, образцы и условия отгрузки.</p>
+        </article>
+        <article class="process-step">
+          <span>04</span>
+          <strong>Контракт</strong>
+          <p>Сопровождаем коммерческие условия, спецификацию и документы.</p>
+        </article>
+        <article class="process-step">
+          <span>05</span>
+          <strong>Склад</strong>
+          <p>Ведем логистику, таможню и доставку партии на ваш склад в РФ.</p>
+        </article>
+      </div>
+    </section>
+    <section class="section agency-section">
+      <div class="agency-copy">
+        <span class="eyebrow">Модель работы</span>
+        <h2>Агентская модель вместо торговой наценки</h2>
+        <p>Вы получаете прямой контракт с производителем и его отпускную цену. FruitPuree Trade работает за агентское вознаграждение, поэтому заинтересован в прозрачной сделке и лучших условиях для закупки.</p>
+      </div>
+      <div class="agency-compare">
+        <article>
+          <span>Обычный трейдер</span>
+          <ul>
+            <li>торговая наценка в цене товара</li>
+            <li>ограниченный выбор поставщиков</li>
+            <li>меньше прозрачности по цепочке</li>
+          </ul>
+        </article>
+        <article class="agency-highlight">
+          <span>FruitPuree Trade</span>
+          <ul>
+            <li>прямой контракт с производителем</li>
+            <li>отпускная цена завода</li>
+            <li>контроль сделки от запроса до склада</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+    <section class="section production-section">
+      <div class="section-head">
+        <span class="eyebrow">Выгода</span>
+        <h2>Почему это выгодно производству</h2>
+      </div>
+      <div class="benefit-list">
+        <article>
+          <strong>Экономия времени закупки</strong>
+          <p>Не нужно самостоятельно искать и проверять десятки зарубежных поставщиков.</p>
+        </article>
+        <article>
+          <strong>Снижение рисков</strong>
+          <p>Контролируем качество, документы, сроки, логистику и соответствие спецификации.</p>
+        </article>
+        <article>
+          <strong>Цена производителя</strong>
+          <p>Вы видите экономику сделки и не платите скрытую маржу перекупщика.</p>
+        </article>
+        <article>
+          <strong>Гибкость по срочным задачам</strong>
+          <p>При необходимости ищем свободные объемы в России и быстрые варианты отгрузки.</p>
+        </article>
+      </div>
+    </section>
     <section class="section">
       <div class="section-head">
         <span class="eyebrow">Быстрый подбор</span>
@@ -127,9 +210,9 @@ function buyerView() {
     if (!form.get("phone") && !form.get("email")) return setStatus("buyersStatus", "Укажите телефон или email.");
     const payload = Object.fromEntries(form.entries());
     payload.products = form.getAll("products");
-    const ok = await postJson("/api/buyers", payload);
-    setStatus("buyersStatus", ok ? "Заявка отправлена." : "Ошибка отправки. Проверьте API.");
-    if (ok) e.target.reset();
+    const result = await postJson("/api/buyers", payload);
+    setStatus("buyersStatus", result.ok ? "Заявка отправлена." : `Ошибка отправки: ${result.error}`);
+    if (result.ok) e.target.reset();
   });
 }
 
@@ -276,9 +359,9 @@ function openOfferModal(productKey) {
     payload.product = product.key;
     payload.language = supplierLang;
     payload.timestamp = new Date().toISOString();
-    const ok = await postJson("/api/suppliers", payload);
-    setStatus("offerStatus", ok ? t.sent : "API error");
-    if (ok) e.target.reset();
+    const result = await postJson("/api/suppliers", payload);
+    setStatus("offerStatus", result.ok ? t.sent : `API error: ${result.error}`);
+    if (result.ok) e.target.reset();
   });
 }
 
@@ -294,9 +377,20 @@ async function postJson(url, payload) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
-    return res.ok;
-  } catch {
-    return false;
+    const text = await res.text();
+    let data = {};
+    try {
+      data = text ? JSON.parse(text) : {};
+    } catch {
+      data = { error: text };
+    }
+
+    return {
+      ok: res.ok && data.ok !== false,
+      error: data.error || data.details || `HTTP ${res.status}`
+    };
+  } catch (error) {
+    return { ok: false, error: error.message || "Network error" };
   }
 }
 
